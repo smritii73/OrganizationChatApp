@@ -1,0 +1,539 @@
+/* WhatsApp Style Call Modal */
+.whatsapp-call-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    z-index: 10000;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.whatsapp-call-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.call-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+    z-index: -1;
+}
+
+.call-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px 20px 40px;
+    text-align: center;
+}
+
+/* Caller Info Styles */
+.caller-info-whatsapp {
+    margin-top: 40px;
+}
+
+.caller-avatar-whatsapp {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.caller-avatar-whatsapp.large {
+    width: 150px;
+    height: 150px;
+}
+
+.avatar-image-whatsapp {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-placeholder-whatsapp {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.caller-name-whatsapp {
+    font-size: 28px;
+    font-weight: 300;
+    margin: 0 0 8px 0;
+    color: white;
+}
+
+.call-type-whatsapp {
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.call-status-whatsapp {
+    font-size: 14px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.call-duration-audio {
+    font-size: 32px;
+    font-weight: 300;
+    margin: 10px 0;
+    color: white;
+}
+
+/* Call Controls - Incoming/Outgoing */
+.call-controls-whatsapp {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 40px;
+}
+
+.call-btn-whatsapp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.call-btn-whatsapp:hover {
+    transform: translateY(-2px);
+}
+
+.btn-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.btn-circle.reject {
+    background: #FF3B30;
+}
+
+.btn-circle.accept {
+    background: #4CAF50;
+}
+
+.btn-circle.cancel {
+    background: #FF9500;
+}
+
+.btn-circle:hover {
+    transform: scale(1.05);
+}
+
+.btn-label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Active Video Call Styles */
+.active-call {
+    background: #000;
+}
+
+.video-container {
+    flex: 1;
+    position: relative;
+    background: #000;
+    overflow: hidden;
+}
+
+.remote-video-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
+
+.remote-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Local Video Picture-in-Picture - FIXED */
+.local-video-pip {
+    position: absolute;
+    bottom: 120px;
+    right: 20px;
+    width: 120px;
+    height: 160px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.local-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.video-off-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 10px;
+    font-size: 12px;
+    gap: 5px;
+}
+
+/* Call Info Overlay */
+.call-info-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 5;
+}
+
+.caller-info-mini {
+    text-align: left;
+}
+
+.caller-name-mini {
+    margin: 0 0 4px 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.call-duration-mini {
+    margin: 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.fullscreen-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+}
+
+.fullscreen-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Bottom Controls */
+.call-controls-bottom {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 0 20px;
+    z-index: 10;
+}
+
+.control-btn-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.control-btn-bottom:hover {
+    transform: translateY(-2px);
+}
+
+.btn-circle-control {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+}
+
+.control-btn-bottom.active .btn-circle-control {
+    background: #FF3B30;
+}
+
+.control-btn-bottom.end-call-btn .btn-circle-control {
+    background: #FF3B30;
+}
+
+.btn-circle-control:hover {
+    transform: scale(1.05);
+}
+
+.control-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Audio Call Controls */
+.audio-call-controls {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.control-btn-audio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.control-btn-audio:hover {
+    transform: translateY(-2px);
+}
+
+.btn-circle-audio {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+}
+
+.control-btn-audio.active .btn-circle-audio {
+    background: #FF3B30;
+}
+
+.control-btn-audio.end-call-audio .btn-circle-audio {
+    background: #FF3B30;
+}
+
+.btn-circle-audio:hover {
+    transform: scale(1.05);
+}
+
+/* No Video Overlay */
+.no-video-overlay {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.user-avatar-large {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+}
+
+.avatar-image-large {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-placeholder-large {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Fullscreen Mode */
+.active-call.fullscreen .local-video-pip {
+    width: 160px;
+    height: 120px;
+    bottom: 100px;
+    right: 20px;
+}
+
+.active-call.fullscreen .local-video {
+    object-fit: cover;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .call-controls-whatsapp {
+        gap: 40px;
+    }
+    
+    .call-controls-bottom {
+        gap: 20px;
+    }
+    
+    .audio-call-controls {
+        gap: 30px;
+    }
+    
+    .local-video-pip {
+        width: 100px;
+        height: 133px;
+        bottom: 100px;
+        right: 10px;
+    }
+    
+    .caller-name-whatsapp {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .call-content {
+        padding: 40px 15px 30px;
+    }
+    
+    .call-controls-whatsapp {
+        gap: 30px;
+    }
+    
+    .call-controls-bottom {
+        gap: 15px;
+        padding: 0 10px;
+        bottom: 20px;
+    }
+    
+    .audio-call-controls {
+        gap: 20px;
+    }
+    
+    .btn-circle {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .btn-circle-control {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .btn-circle-audio {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .local-video-pip {
+        width: 80px;
+        height: 106px;
+        bottom: 80px;
+        right: 10px;
+    }
+    
+    .caller-name-whatsapp {
+        font-size: 22px;
+    }
+    
+    .call-duration-audio {
+        font-size: 28px;
+    }
+}
+
+/* Animation for call states */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.whatsapp-call-modal {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Ensure video elements work properly */
+video {
+    display: block;
+    background: #000;
+}
+
+/* Fix for image error handling */
+.caller-avatar-whatsapp img:not([src]) {
+    display: none;
+}
+
+.caller-avatar-whatsapp .avatar-placeholder-whatsapp {
+    display: flex;
+}
+
+.caller-avatar-whatsapp img[src]:not([src=""]) {
+    display: block;
+}
+
+.caller-avatar-whatsapp img[src]:not([src=""]) ~ .avatar-placeholder-whatsapp {
+    display: none;
+}

@@ -1,0 +1,350 @@
+/* ==========================================
+   MEETINGS CONTAINER
+========================================== */
+
+.meetings-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.meetings-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.meetings-header h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #1f2937;
+}
+
+.meetings-header p {
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+/* ==========================================
+   LAYOUT - TWO PANEL
+========================================== */
+
+.meetings-layout {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 20px;
+  min-height: 600px;
+}
+
+/* ==========================================
+   LEFT PANEL - MEETINGS LIST
+========================================== */
+
+.meetings-list {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 20px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.meeting-card {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.meeting-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+  transform: translateY(-2px);
+}
+
+.meeting-card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #1f2937;
+}
+
+.meeting-date {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.meeting-duration {
+  font-size: 0.85rem;
+  color: #8b5cf6;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.status-badge.scheduled {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge.ongoing {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.completed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.meeting-summary-preview {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+/* ==========================================
+   RIGHT PANEL - MEETING DETAILS
+========================================== */
+
+.meeting-details {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #9ca3af;
+  font-size: 1.1rem;
+}
+
+.meeting-full-view h3 {
+  font-size: 1.8rem;
+  color: #1f2937;
+  margin-bottom: 25px;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 15px;
+}
+
+/* ==========================================
+   🔥 ANALYTICS SECTION
+========================================== */
+
+.analytics-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.analytics-section h4 {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.metric {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.metric:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-3px);
+}
+
+.metric-label {
+  display: block;
+  font-size: 0.85rem;
+  opacity: 0.9;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* Sentiment Colors */
+.sentiment-positive {
+  color: #4ade80;
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+}
+
+.sentiment-neutral {
+  color: #fbbf24;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+}
+
+.sentiment-tense {
+  color: #f87171;
+  text-shadow: 0 0 10px rgba(248, 113, 113, 0.5);
+}
+
+/* ==========================================
+   CONTENT SECTIONS
+========================================== */
+
+.section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #f9fafb;
+  border-radius: 10px;
+  border-left: 4px solid #667eea;
+}
+
+.section h4 {
+  font-size: 1.2rem;
+  color: #1f2937;
+  margin-bottom: 15px;
+}
+
+.section p {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.section ul li {
+  padding: 10px 15px;
+  margin-bottom: 8px;
+  background: white;
+  border-radius: 6px;
+  border-left: 3px solid #8b5cf6;
+  color: #374151;
+}
+
+.report-box {
+  background: #1f2937;
+  color: #f3f4f6;
+  padding: 20px;
+  border-radius: 8px;
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* ==========================================
+   🔥 EXPORT ACTIONS
+========================================== */
+
+.export-actions {
+  margin-top: 30px;
+  text-align: center;
+  padding-top: 20px;
+  border-top: 2px solid #e5e7eb;
+}
+
+.export-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.export-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.export-btn:active {
+  transform: translateY(0);
+}
+
+/* ==========================================
+   ERROR & LOADING STATES
+========================================== */
+
+.error-text {
+  color: #dc2626;
+  background: #fef2f2;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #dc2626;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width: 768px) {
+  .meetings-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .meetings-list {
+    max-height: 400px;
+  }
+
+  .analytics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .meeting-full-view h3 {
+    font-size: 1.4rem;
+  }
+
+  .metric-value {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .meetings-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .section {
+    padding: 15px;
+  }
+}
