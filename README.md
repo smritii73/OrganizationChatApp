@@ -1,176 +1,340 @@
-# ᑕOᑎᑎEᑕT 🪢
+🚀 OrganizationChatApp
+Real-Time Professional Chat & AI Meeting Platform
 
-Welcome to **ᑕOᑎᑎEᑕT 🪢** - A real-time messaging application designed for seamless and instant communication. Built with the MERN stack (MongoDB, Express, React, Node.js) and Socket.IO for real-time chat functionality, **ᑕOᑎᑎEᑕT 🪢** ensures your conversations are swift and secure.
+MERN + Socket.io + ZEGO + Groq LLM
 
----
- **Live Demo**: [ᑕOᑎᑎEᑕT 🪢](https://chatify-f36x.onrender.com)
- 
-## 🚀 **Features**
+A professional organization-restricted real-time chat and meeting platform built using the MERN stack with WebSocket.io, ZEGO Cloud integration, and Groq LLM for AI-powered summarization.
 
-- 💬 **Real-time Messaging**: Chat instantly with your contacts, with real-time updates.
-- 🔒 **User Authentication**: Secure sign-up and login using JWT-based authentication.
-- 📝 **Add Contacts**: Effortlessly add contacts to your chat list.
-- 📱 **Responsive Design**: Optimized for both desktop and mobile devices.
-- 🔍 **Search Functionality**: Quickly find and start conversations with your contacts.
-- 📂 **Sidebar Navigation**: Manage your conversations and contacts from the intuitive sidebar.
-- 🔔 **Notifications**: Receive notifications for new messages.
+This platform allows only verified organizational email users (e.g., @slrtce.in) to communicate, reducing spam and ensuring professional interaction.
 
----
+🧠 Features
 
-## 🛠️ **Installation**
+🔐 JWT Authentication with bcrypt hashing
 
-Get a local copy of CONNECT up and running with these simple steps:
+🏢 Organizational email restriction (ALLOWED_DOMAINS)
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/Muntajir11/RealTimeChat.git
-   cd CONNECT
-   ```
+💬 Real-time one-to-one chat using Socket.io
 
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+😀 Emoji-supported chat interface
 
-3. **Set up environment variables**:
-   Create a `.env` file in the root directory and add the following:
-   ```bash
-   PORT=5000
-   MONGO_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret
-   ```
+📡 MongoDB persistent storage
 
-4. **Start the development server**:
-   ```bash
-   npm run server   # In the Root folder
-   npm run dev      # In the Frontend folder
-   ```
+🎥 ZEGO Cloud video/meeting integration
 
-5. **Access the application**:
-   Open your browser and navigate to:
-   ```
-   http://localhost:3000
-   ```
+🤖 AI meeting summarization using Groq (LLaMA 3-70B-8192)
 
-You should now see the **ᑕOᑎᑎEᑕT 🪢** application running locally.
+📊 Structured meeting record generation
 
----
+🌍 Multilingual-ready architecture
 
+🛡 Secure environment variable configuration
 
-### 📁 **Project Structure**
+🛠 Tech Stack
+Frontend
 
-```
-CONNECT
-├── 🗂️ Backend
-│   ├── 📂 controllers       # Handles the logic for various routes
-│   ├── 📂 db                # Database configuration and models
-│   ├── 📂 middleware        # Custom middleware functions
-│   ├── 📂 models            # Mongoose schemas and models
-│   ├── 📂 routes            # API route definitions
-│   ├── 📂 socket            # Socket.IO configuration and events
-│   ├── 📂 utils             # Utility functions
-│   └── 📄 server.js         # Entry point for the Node.js server
+ReactJS, Tailwind CSS, Axios, React Router DOM, Context API, Vite
+
+Backend
+
+NodeJS, ExpressJS, WebSocket.io, JWT, bcrypt, Mongoose
+
+Database
+
+MongoDB (Compass / Local)
+
+AI / External Services
+
+Groq API (LLaMA 3-70B-8192)
+ZEGO Cloud SDK
+
+📂 Project Structure
+OrganizationChatApp
 │
-├── 🗂️ Frontend
-│   ├── 📂 public            # Static assets (images, icons, etc.)
-│   ├── 📂 src               # Main source directory for the React app
-│   │   ├── 🖼️ assets        # Images, fonts, and other assets
-│   │   ├── 🧩 components    # Reusable React components
-│   │   ├── 🌐 context       # React Context API for state management
-│   │   ├── ⚙️ hooks         # Custom hooks for React
-│   │   ├── 📄 pages         # Page components for routing
-│   │   ├── 🛠️ utils        # Utility functions for frontend
-│   │   └── 📦 zustand       # Zustand store for global state management
-│   ├── 🎨 App.css           # Global styles for the React app
-│   ├── ⚛️ App.jsx          # Main application component
-│   ├── 🎨 index.css         # Global CSS file
-│   └── ⚛️ main.jsx         # Entry point for the React application
+├── backend
+│   ├── controllers
+│   ├── middleware
+│   ├── models
+│   ├── routes
+│   ├── socket
+│   ├── db
+│   └── server.js
 │
-├── 📄 .eslintrc.cjs         # ESLint configuration
-├── 📄 .gitignore            # Git ignore file
-├── 📄 index.html            # Main HTML file for the React app
-├── 📄 package.json          # Dependencies and scripts for the frontend
-├── 📄 package-lock.json     # Locked versions of dependencies
-└── 📄 README.md             # Project documentation
+├── frontend
+│   ├── src
+│   ├── components
+│   ├── context
+│   ├── pages
+│   ├── hooks
+│   └── main.jsx
+⚙️ FULL SETUP GUIDE (Noob Friendly)
 
- ```
-### 📝 **Explanation**
+Follow these steps carefully.
 
-- **Backend**: 🗂️ Contains all server-side code including controllers, database configurations, middleware, models, routes, socket configuration, and utilities.
-- **Frontend**: 🗂️ Contains the front-end code organized into assets, components, context, hooks, pages, utilities, and Zustand store.
-- **Root Files**:
-  - `.eslintrc.cjs`: 📝 ESLint configuration for consistent code quality.
-  - `.gitignore`: 📄 Specifies files and directories to be ignored by Git.
-  - `index.html`: 📄 The HTML template for the React app.
-  - `package.json` & `package-lock.json`: 📦 Manage project dependencies and scripts.
+🧩 1️⃣ Install Requirements
 
+Install these first:
 
-## 🎮 **Usage**
+Node.js (v16+)
 
-Once everything is set up:
-- **Sign up**: Create a new account.
-- **Login**: Use your credentials to log in.
-- **Add Contacts**: Search for users and add them to your contact list.
-- **Start Chatting**: Select a contact and begin a conversation.
+MongoDB (Local) OR MongoDB Compass
 
----
+Git
 
-## 🖼️ **Screenshots**
+VS Code
 
-**Login Page**  
-![Login Page](https://github.com/user-attachments/assets/49b53cdd-7de8-42ec-9640-7d80afc18a41)
+Check installation:
 
-**SignUp Page**  
-![SignUp Page](https://github.com/user-attachments/assets/365eeb7a-f135-45d2-909a-ecd3b20e2f40)
+node -v
+npm -v
+📥 2️⃣ Clone Repository
+git clone https://github.com/smritii73/OrganizationChatApp.git
+cd OrganizationChatApp
+🛢 3️⃣ MongoDB Setup
 
-**Home Page**  
-![Home Page](https://github.com/user-attachments/assets/f9eb97c6-32fa-496f-9ddf-5eec00326605)
+Make sure MongoDB is running locally.
 
-**Chat Window**  
-![Chat Window](https://github.com/user-attachments/assets/07ed415d-7734-4988-a385-754688c55a9c)
+Database used:
 
----
+mongodb://localhost:27017/ChatAppDB
 
-## 🛠️ **Technologies Used**
+If using MongoDB Compass:
 
-- **Frontend**: React, Zustand, Tailwind CSS
-- **Backend**: Node.js, Express.js, MongoDB, Mongoose
-- **Real-time Communication**: Socket.IO
-- **Authentication**: JWT, bcrypt
-- **Deployment**: Render
+Open Compass
 
----
+Connect to mongodb://localhost:27017
 
-## 🤝 **Contributing**
+Database will auto-create when app runs
 
-Contributions are more than welcome! If you have ideas, improvements, or new features you'd like to add:
+🖥 4️⃣ Backend Setup
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/YourFeature`).
-3. Commit your changes (`git commit -m 'Add some feature'`).
-4. Push to the branch (`git push origin feature/YourFeature`).
-5. Open a Pull Request.
+Go inside backend:
 
-Please ensure that your code is well-documented and tested.
+cd backend
+npm install
+📄 Create .env file inside backend folder
 
----
+Paste EXACTLY this:
 
-## 📜 **License**
+PORT=5000
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MONGO_URI_URI=mongodb://localhost:27017/ChatAppDB
 
----
+JWT_SECRET=sdfghhgfd.......
 
-## 📬 **Contact**
+CLIENT_URL=http://localhost:3000
 
-Have questions, suggestions, or feedback? Feel free to reach out to the co-creators:
-----
-- **Muntajir**: [Muntajirwork11@gmail.com](mailto:Muntajirwork11@gmail.com)
-- **GitHub**: [Muntajir11](https://github.com/Muntajir11)
-- **LinkedIn**: [Muntajir](https://www.linkedin.com/in/munta-jir-30737a230/)
-----
-- **Tushar**: [Tushar.Manna@outlook.com](mailto:Tushar.Manna@outlook.com)
-- **GitHub**: [Tushar-Manna](https://github.com/Tushar-Manna)
-- **LinkedIn**: [tusharmanna](https://www.linkedin.com/in/tusharmanna/)
-----
-Thank you for using **ᑕOᑎᑎEᑕT 🪢**! 🌟
+ZEGO_APP_ID=116910XXXXX
+ZEGO_SERVER_SECRET=fb32057250XXXXXXXXXX69d5
+
+ALLOWED_DOMAINS=slrtce.in
+
+NODE_ENV=development
+
+GROQ_API_KEY=gsk_E9WBlzJJuN2p2pxgiROMWXXXXXXXXGeFPwRxPer
+
+⚠ IMPORTANT:
+
+Do NOT commit .env
+
+Replace secrets with your actual credentials
+
+Never expose GROQ_API_KEY publicly
+
+▶ Start Backend
+npm start
+
+Expected Output:
+
+Server running on port 5000
+Connected to MongoDB
+🎨 5️⃣ Frontend Setup
+
+Open new terminal:
+
+cd frontend
+npm install
+📄 Create .env inside frontend
+VITE_ZEGO_APP_ID=1169XXX
+VITE_ZEGO_SERVER_SECRET=fb32057250176XXXXXXXXXXXXXXXXX
+▶ Start Frontend
+npm run dev
+
+App will run at:
+
+http://localhost:3000
+🔐 Authentication Rules
+
+Only emails with domain @slrtce.in are allowed
+
+Example:
+
+smriti@slrtce.in
+ ✅ Allowed
+
+smriti@gmail.com
+ ❌ Blocked
+
+This prevents spam and ensures professional communication.
+
+💬 Chat System
+
+Real-time messaging via Socket.io
+
+One-to-one communication
+
+Emoji support
+
+Persistent message storage in MongoDB
+
+JWT-protected routes
+
+🎥 ZEGO Meeting Integration
+
+Uses:
+
+ZEGO_APP_ID
+
+ZEGO_SERVER_SECRET
+
+Provides:
+
+Real-time meeting/video capability
+
+Secure token generation
+
+Professional meeting environment
+
+🤖 Groq AI Integration
+
+Uses:
+
+GROQ_API_KEY
+
+Model:
+LLaMA 3-70B-8192
+
+Used For:
+
+Meeting transcript summarization
+
+Executive summary generation
+
+Structured professional report creation
+
+🛡 Security Architecture
+
+Password hashed using bcrypt
+
+JWT token authentication
+
+Protected routes middleware
+
+Environment variable protection
+
+Organizational email restriction
+
+CORS configured via CLIENT_URL
+
+🚨 Common Errors & Fixes
+❌ MongoDB not connecting
+
+Make sure MongoDB service is running.
+
+❌ Invalid Token Error
+
+Check:
+
+JWT_SECRET matches
+
+Token being sent in headers
+
+❌ ZEGO Not Working
+
+Verify:
+
+Correct App ID
+
+Correct Server Secret
+
+Frontend .env configured properly
+
+❌ Groq API Error
+
+Make sure:
+
+GROQ_API_KEY is valid
+
+API key not expired
+
+Correct model name used
+
+🧪 API Testing
+
+Use Postman:
+
+Base URL:
+
+http://localhost:5000/api
+
+Test:
+
+Register
+
+Login
+
+Chat endpoints
+
+Meeting routes
+
+🏗 Production Deployment Notes
+
+For Production:
+
+Backend:
+
+Deploy on Render / Railway / AWS
+
+Change CLIENT_URL to deployed frontend URL
+
+Frontend:
+
+Deploy on Vercel
+
+Update API base URL
+
+🧑‍💻 Developer Notes
+
+Environment Variables Used:
+
+Backend:
+PORT
+MONGO_URI_URI
+JWT_SECRET
+CLIENT_URL
+ZEGO_APP_ID
+ZEGO_SERVER_SECRET
+ALLOWED_DOMAINS
+NODE_ENV
+GROQ_API_KEY
+
+Frontend:
+VITE_ZEGO_APP_ID
+VITE_ZEGO_SERVER_SECRET
+
+📌 Final Words
+
+This project demonstrates:
+
+Full MERN stack architecture
+
+Real-time communication engineering
+
+AI integration using Groq
+
+Secure authentication design
+
+Professional domain-based access restriction
+
+Video meeting integration via ZEGO
+
+It is production-ready, scalable, and extensible.
