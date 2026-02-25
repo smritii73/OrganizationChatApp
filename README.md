@@ -1,97 +1,105 @@
-🚀 OrganizationChatApp
-Real-Time Professional Chat & AI Meeting Platform
+# 🚀 OrganizationChatApp  
+### Real-Time Professional Chat & AI Meeting Platform  
 
-MERN + Socket.io + ZEGO + Groq LLM
+A secure, organization-restricted real-time chat and meeting platform built using the MERN stack with WebSocket.io, ZEGO Cloud integration, and Groq LLM for AI-powered meeting summarization.
 
-A professional organization-restricted real-time chat and meeting platform built using the MERN stack with WebSocket.io, ZEGO Cloud integration, and Groq LLM for AI-powered summarization.
+This platform allows only verified organizational email users (e.g., `@slrtce.in`) to register, ensuring professional-only communication and reduced spam traffic.
 
-This platform allows only verified organizational email users (e.g., @slrtce.in) to communicate, reducing spam and ensuring professional interaction.
+---
 
-🧠 Features
+## 🧠 Features
 
-🔐 JWT Authentication with bcrypt hashing
+- 🔐 JWT Authentication with bcrypt password hashing
+- 🏢 Organizational email restriction (`ALLOWED_DOMAINS`)
+- 💬 Real-time one-to-one chat using Socket.io
+- 😀 Emoji-supported chat interface
+- 🛢 MongoDB persistent message storage
+- 🎥 ZEGO Cloud meeting/video integration
+- 🤖 AI meeting summarization using Groq (LLaMA 3-70B-8192)
+- 📊 Structured meeting report generation
+- 🌍 Multilingual-ready architecture
+- 🛡 Secure environment variable configuration
 
-🏢 Organizational email restriction (ALLOWED_DOMAINS)
+---
 
-💬 Real-time one-to-one chat using Socket.io
+## 🛠 Tech Stack
 
-😀 Emoji-supported chat interface
+### Frontend
+- ReactJS
+- Tailwind CSS
+- Axios
+- React Router DOM
+- Context API
+- Vite
 
-📡 MongoDB persistent storage
+### Backend
+- NodeJS
+- ExpressJS
+- WebSocket.io
+- JWT (jsonwebtoken)
+- bcrypt
+- Mongoose
 
-🎥 ZEGO Cloud video/meeting integration
+### Database
+- MongoDB (Local / Compass)
 
-🤖 AI meeting summarization using Groq (LLaMA 3-70B-8192)
+### AI & External Services
+- Groq API (LLaMA 3-70B-8192)
+- ZEGO Cloud SDK
 
-📊 Structured meeting record generation
+---
 
-🌍 Multilingual-ready architecture
-
-🛡 Secure environment variable configuration
-
-🛠 Tech Stack
-Frontend
-
-ReactJS, Tailwind CSS, Axios, React Router DOM, Context API, Vite
-
-Backend
-
-NodeJS, ExpressJS, WebSocket.io, JWT, bcrypt, Mongoose
-
-Database
-
-MongoDB (Compass / Local)
-
-AI / External Services
-
-Groq API (LLaMA 3-70B-8192)
-ZEGO Cloud SDK
-
-📂 Project Structure
+## 📂 Project Structure
 OrganizationChatApp
 │
 ├── backend
-│   ├── controllers
-│   ├── middleware
-│   ├── models
-│   ├── routes
-│   ├── socket
-│   ├── db
-│   └── server.js
+│ ├── controllers
+│ ├── middleware
+│ ├── models
+│ ├── routes
+│ ├── socket
+│ ├── db
+│ └── server.js
 │
 ├── frontend
-│   ├── src
-│   ├── components
-│   ├── context
-│   ├── pages
-│   ├── hooks
-│   └── main.jsx
-⚙️ FULL SETUP GUIDE (Noob Friendly)
+│ ├── src
+│ ├── components
+│ ├── context
+│ ├── pages
+│ ├── hooks
+│ └── main.jsx
+│
+└── README.md
 
-Follow these steps carefully.
 
-🧩 1️⃣ Install Requirements
+---
 
-Install these first:
+# ⚙️ Local Setup Guide (Step-by-Step)
 
-Node.js (v16+)
+Follow these instructions carefully.
 
-MongoDB (Local) OR MongoDB Compass
+---
 
-Git
+## ✅ 1. Prerequisites
 
-VS Code
+Install:
+
+- Node.js (v16+ recommended)
+- MongoDB (Local installation)
+- Git
+- VS Code (or any code editor)
 
 Check installation:
 
+```bash
 node -v
 npm -v
-📥 2️⃣ Clone Repository
+✅ 2. Clone the Repository
 git clone https://github.com/smritii73/OrganizationChatApp.git
 cd OrganizationChatApp
-🛢 3️⃣ MongoDB Setup
+✅ 3. MongoDB Setup
 
-Make sure MongoDB is running locally.
+Ensure MongoDB is running locally.
 
 Database used:
 
@@ -103,60 +111,62 @@ Open Compass
 
 Connect to mongodb://localhost:27017
 
-Database will auto-create when app runs
+The database will auto-create on first run
 
-🖥 4️⃣ Backend Setup
-
-Go inside backend:
-
+🔧 Backend Setup
+Step 1: Install Dependencies
 cd backend
 npm install
-📄 Create .env file inside backend folder
+Step 2: Create .env File (Inside backend folder)
 
-Paste EXACTLY this:
+Create a file named .env and paste:
 
 PORT=5000
 
 MONGO_URI_URI=mongodb://localhost:27017/ChatAppDB
 
-JWT_SECRET=sdfghhgfd.......
+JWT_SECRET=your_super_secret_key_here
 
 CLIENT_URL=http://localhost:3000
 
-ZEGO_APP_ID=116910XXXXX
-ZEGO_SERVER_SECRET=fb32057250XXXXXXXXXX69d5
+ZEGO_APP_ID=your_zego_app_id
+ZEGO_SERVER_SECRET=your_zego_server_secret
 
 ALLOWED_DOMAINS=slrtce.in
 
 NODE_ENV=development
 
-GROQ_API_KEY=gsk_E9WBlzJJuN2p2pxgiROMWXXXXXXXXGeFPwRxPer
+GROQ_API_KEY=your_groq_api_key
 
-⚠ IMPORTANT:
+⚠️ Important:
 
-Do NOT commit .env
+Never commit .env
 
-Replace secrets with your actual credentials
+Replace credentials with your own values
 
-Never expose GROQ_API_KEY publicly
+Keep GROQ_API_KEY private
 
-▶ Start Backend
+Step 3: Start Backend
 npm start
 
-Expected Output:
+Expected output:
 
 Server running on port 5000
 Connected to MongoDB
-🎨 5️⃣ Frontend Setup
+🎨 Frontend Setup
+Step 1: Install Dependencies
 
-Open new terminal:
+Open a new terminal:
 
 cd frontend
 npm install
-📄 Create .env inside frontend
-VITE_ZEGO_APP_ID=1169XXX
-VITE_ZEGO_SERVER_SECRET=fb32057250176XXXXXXXXXXXXXXXXX
-▶ Start Frontend
+Step 2: Create .env (Inside frontend folder)
+
+Create a file named .env:
+
+VITE_ZEGO_APP_ID=your_zego_app_id
+VITE_ZEGO_SERVER_SECRET=your_zego_server_secret
+Step 3: Start Frontend
 npm run dev
 
 App will run at:
@@ -164,33 +174,41 @@ App will run at:
 http://localhost:3000
 🔐 Authentication Rules
 
-Only emails with domain @slrtce.in are allowed
+Only organizational emails are allowed.
 
 Example:
 
+Email	Access
 smriti@slrtce.in
- ✅ Allowed
-
+	✅ Allowed
 smriti@gmail.com
- ❌ Blocked
+	❌ Blocked
 
-This prevents spam and ensures professional communication.
+This ensures:
+
+Professional-only communication
+
+Reduced spam traffic
+
+Controlled user ecosystem
 
 💬 Chat System
 
-Real-time messaging via Socket.io
-
-One-to-one communication
+Real-time one-to-one messaging via Socket.io
 
 Emoji support
 
-Persistent message storage in MongoDB
+Persistent storage in MongoDB
 
 JWT-protected routes
 
-🎥 ZEGO Meeting Integration
+Automatic user authentication validation
 
-Uses:
+🎥 ZEGO Cloud Integration
+
+Used for real-time meeting/video functionality.
+
+Requires:
 
 ZEGO_APP_ID
 
@@ -198,143 +216,72 @@ ZEGO_SERVER_SECRET
 
 Provides:
 
-Real-time meeting/video capability
+Secure token-based meeting access
 
-Secure token generation
-
-Professional meeting environment
+Professional video interaction
 
 🤖 Groq AI Integration
 
 Uses:
 
-GROQ_API_KEY
+Groq API
 
-Model:
-LLaMA 3-70B-8192
+LLaMA 3-70B-8192 model
 
-Used For:
+Capabilities:
 
 Meeting transcript summarization
 
 Executive summary generation
 
-Structured professional report creation
+Structured business report creation
 
 🛡 Security Architecture
 
-Password hashed using bcrypt
+Passwords hashed using bcrypt
 
-JWT token authentication
+JWT token-based authentication
 
-Protected routes middleware
+Protected backend routes
 
-Environment variable protection
+Environment variables secured
 
-Organizational email restriction
+CORS restricted via CLIENT_URL
 
-CORS configured via CLIENT_URL
+Organizational domain filtering
 
 🚨 Common Errors & Fixes
-❌ MongoDB not connecting
+MongoDB Not Connecting
 
-Make sure MongoDB service is running.
+Ensure MongoDB service is running locally.
 
-❌ Invalid Token Error
+Invalid Token Error
 
-Check:
+Check JWT_SECRET
 
-JWT_SECRET matches
+Ensure token is sent in headers
 
-Token being sent in headers
+ZEGO Not Working
 
-❌ ZEGO Not Working
+Verify App ID & Server Secret
 
-Verify:
+Confirm frontend .env setup
 
-Correct App ID
+Groq API Error
 
-Correct Server Secret
+Validate GROQ_API_KEY
 
-Frontend .env configured properly
+Ensure API key is active
 
-❌ Groq API Error
-
-Make sure:
-
-GROQ_API_KEY is valid
-
-API key not expired
-
-Correct model name used
-
-🧪 API Testing
-
-Use Postman:
-
-Base URL:
-
+🧪 API Base URL
 http://localhost:5000/api
 
-Test:
+Test endpoints using Postman:
 
 Register
 
 Login
 
-Chat endpoints
+Chat routes
 
 Meeting routes
-
-🏗 Production Deployment Notes
-
-For Production:
-
-Backend:
-
-Deploy on Render / Railway / AWS
-
-Change CLIENT_URL to deployed frontend URL
-
-Frontend:
-
-Deploy on Vercel
-
-Update API base URL
-
-🧑‍💻 Developer Notes
-
-Environment Variables Used:
-
-Backend:
-PORT
-MONGO_URI_URI
-JWT_SECRET
-CLIENT_URL
-ZEGO_APP_ID
-ZEGO_SERVER_SECRET
-ALLOWED_DOMAINS
-NODE_ENV
-GROQ_API_KEY
-
-Frontend:
-VITE_ZEGO_APP_ID
-VITE_ZEGO_SERVER_SECRET
-
-📌 Final Words
-
-This project demonstrates:
-
-Full MERN stack architecture
-
-Real-time communication engineering
-
-AI integration using Groq
-
-Secure authentication design
-
-Professional domain-based access restriction
-
-Video meeting integration via ZEGO
-
-It is production-ready, scalable, and extensible.
