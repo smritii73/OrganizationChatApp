@@ -7,9 +7,8 @@ import useListenMessages from "../../hooks/useListenMessages";
 const Messages = () => {
 	const { messages, loading } = useGetMessages();
 	useListenMessages();
-	const lastMessageRef = useRef();
+	const lastMessageRef = useRef(null);
 
-	// Scroll to last message
 	useEffect(() => {
 		setTimeout(() => {
 			lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -19,26 +18,33 @@ const Messages = () => {
 	const safeMessages = Array.isArray(messages) ? messages : [];
 
 	return (
-	<div className="flex-1 overflow-y-auto px-4 py-2">
-		{!loading &&
-		safeMessages.length > 0 &&
-		safeMessages.map((message) => (
-			<div key={message._id} ref={lastMessageRef}>
-			<Message message={message} />
-			</div>
-		))}
+		<div className="messages-container custom-scrollbar">
+			{!loading &&
+				safeMessages.map((message, index) => (
+					<div
+						key={message._id}
+						ref={index === safeMessages.length - 1 ? lastMessageRef : null}
+						className="msg-appear"
+						style={{ animationDelay: `${Math.min(index * 0.04, 0.4)}s` }}
+					>
+						<Message message={message} />
+					</div>
+				))}
 
-		{loading &&
-		[...Array(3)].map((_, idx) => <MessageSkeleton key={idx} />)}
+			{loading &&
+				[...Array(3)].map((_, idx) => (
+					<MessageSkeleton key={idx} />
+				))}
 
-		{!loading && safeMessages.length === 0 && (
-		<div className="flex items-center justify-center h-full text-gray-400">
-			Send a message to start the conversation
+			{!loading && safeMessages.length === 0 && (
+				<div className="empty-chat">
+					<span className="empty-icon">💬</span>
+					<p>Start the conversation</p>
+					<span className="empty-hint">Say something nice ✨</span>
+				</div>
+			)}
 		</div>
-		)}
-	</div>
 	);
-
 };
 
 export default Messages;

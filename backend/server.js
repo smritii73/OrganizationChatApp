@@ -18,6 +18,7 @@ import { initSocket } from "./socket/socket.js";
 /* LOAD ENV */
 
 dotenv.config();
+console.log("Loaded GEMINI KEY:", process.env.GEMINI_API_KEY);
 const app = express();
 const server = http.createServer(app);
 initSocket(server);

@@ -27,12 +27,19 @@ const MessageContainer = ({ onBack }) => {
   const zegoInstance = useRef(null);
   const meetingIdRef = useRef(null);
   const recognitionRef = useRef(null);
+  // 🔥 FIX: ref to always have latest transcript (avoids stale closure in endCall)
+  const transcriptRef = useRef("");
 
   const isSelectedUserOnline =
     selectedConversation &&
     onlineUsers.some(
       (id) => id.toString() === selectedConversation._id.toString()
     );
+
+  // Keep transcriptRef in sync with transcript state
+  useEffect(() => {
+    transcriptRef.current = transcript;
+  }, [transcript]);
 
   /* ===============================
      🎙 BROWSER SPEECH RECOGNITION
@@ -334,11 +341,14 @@ const MessageContainer = ({ onBack }) => {
       userToCall: selectedConversation._id,
     });
 
+    // 🔥 FIX: use transcriptRef.current instead of transcript to avoid stale closure
+    const finalTranscript = transcriptRef.current;
+
     console.log("📊 FINAL STATS:");
-    console.log("- Transcript length:", transcript.length, "chars");
+    console.log("- Transcript length:", finalTranscript.length, "chars");
     console.log("- Meeting ID:", meetingIdRef.current);
     console.log("📄 FULL TRANSCRIPT:");
-    console.log(transcript || "(empty)");
+    console.log(finalTranscript || "(empty)");
     console.log("=====================================");
 
     if (!meetingIdRef.current) {
@@ -346,10 +356,11 @@ const MessageContainer = ({ onBack }) => {
       alert("Error: Meeting was not created properly. Cannot save transcript.");
       handleCallCleanup();
       setTranscript("");
+      transcriptRef.current = "";
       return;
     }
 
-    if (transcript.trim() === "") {
+    if (finalTranscript.trim() === "") {
       console.warn("⚠️ TRANSCRIPT IS EMPTY!");
       const proceed = confirm(
         "No speech was captured during the call.\n\n" +
@@ -363,6 +374,7 @@ const MessageContainer = ({ onBack }) => {
       if (!proceed) {
         handleCallCleanup();
         setTranscript("");
+        transcriptRef.current = "";
         meetingIdRef.current = null;
         return;
       }
@@ -372,13 +384,13 @@ const MessageContainer = ({ onBack }) => {
       console.log("📤 Sending transcript to backend...");
       const url = `${BASE_URL}/api/meetings/${meetingIdRef.current}/generate-report`;
       console.log("URL:", url);
-      console.log("Transcript to send:", transcript);
+      console.log("Transcript to send:", finalTranscript);
 
       const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ transcript }),
+        body: JSON.stringify({ transcript: finalTranscript }),
       });
 
       const data = await res.json();
@@ -403,6 +415,7 @@ const MessageContainer = ({ onBack }) => {
 
     handleCallCleanup();
     setTranscript("");
+    transcriptRef.current = "";
     meetingIdRef.current = null;
     console.log("📴 ========== CALL ENDED ==========");
   };

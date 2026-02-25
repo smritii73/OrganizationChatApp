@@ -1,17 +1,95 @@
-.typing-status {
-	font-size: 15px;
-	color: #07fd2b; /* light blue */
-	animation: pulse 1.5s infinite;
-    position:absolute;
-    right:60px;
+/* ============================================================
+   Conversation Item
+   ============================================================ */
+
+.conversation-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  position: relative;
 }
 
+.conversation-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.conversation-selected {
+  background: rgba(37, 99, 235, 0.15) !important;
+  border: 1px solid rgba(37, 99, 235, 0.3);
+}
+
+/* ── Avatar ─────────────────────────────────────────────── */
+.conversation-avatar {
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+}
+
+.conversation-avatar img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  background: #1e2535;
+}
+
+.online-dot {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 11px;
+  height: 11px;
+  background: #22c55e;
+  border-radius: 50%;
+  border: 2px solid #161b27;
+}
+
+/* ── Content ────────────────────────────────────────────── */
+.conversation-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.conversation-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #f1f5f9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.typing-status {
+  font-size: 0.75rem;
+  color: #4ade80;
+  animation: pulse 1.5s infinite;
+}
 
 @keyframes pulse {
-	0%, 100% {
-		opacity: 1;
-	}
-	50% {
-		opacity: 0.4;
-	}
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ── Emoji ──────────────────────────────────────────────── */
+.conversation-emoji {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* ── Divider ────────────────────────────────────────────── */
+.conversation-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.04);
+  margin: 2px 12px;
 }

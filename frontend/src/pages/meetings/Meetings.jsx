@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { BASE_URL } from "../../Url";
 import { useAuthContext } from "../../context/AuthContext";
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 import "./Meetings.css";
 
 const Meetings = () => {
@@ -72,17 +71,159 @@ const Meetings = () => {
   };
 
   /* ==========================================
-     EXPORT PDF
+     EXPORT PDF - Fixed (pure jsPDF, no html2canvas)
   ========================================== */
 
-  const exportPDF = async () => {
-    const element = document.getElementById("report-content");
-    const canvas = await html2canvas(element);
-    const imgData = canvas.toDataURL("image/png");
+  const exportPDF = () => {
+    if (!selectedMeeting) return;
 
-    const pdf = new jsPDF("p", "mm", "a4");
-    pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
-    pdf.save("Meeting_Report.pdf");
+    const doc = new jsPDF({ unit: "mm", format: "a4" });
+    const pageWidth = 210;
+    const pageHeight = 297;
+    const margin = 15;
+    const contentWidth = pageWidth - margin * 2;
+    let y = margin;
+
+    const checkPageBreak = (needed = 10) => {
+      if (y + needed > pageHeight - margin) {
+        doc.addPage();
+        y = margin;
+      }
+    };
+
+    const writeText = (text, fontSize = 11, bold = false, color = [30, 30, 30]) => {
+      doc.setFontSize(fontSize);
+      doc.setFont("helvetica", bold ? "bold" : "normal");
+      doc.setTextColor(...color);
+      const lines = doc.splitTextToSize(String(text || ""), contentWidth);
+      checkPageBreak(lines.length * (fontSize * 0.45));
+      doc.text(lines, margin, y);
+      y += lines.length * (fontSize * 0.45) + 2;
+    };
+
+    const writeSectionHeader = (title) => {
+      checkPageBreak(12);
+      doc.setFillColor(102, 126, 234);
+      doc.rect(margin, y, contentWidth, 8, "F");
+      doc.setFontSize(11);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(255, 255, 255);
+      doc.text(title, margin + 3, y + 5.5);
+      y += 11;
+      doc.setTextColor(30, 30, 30);
+    };
+
+    const writeListItems = (items) => {
+      if (!items || items.length === 0) {
+        writeText("  No items recorded.", 10, false, [130, 130, 130]);
+        return;
+      }
+      items.forEach((item, i) => {
+        const lines = doc.splitTextToSize(`  ${i + 1}. ${item}`, contentWidth - 4);
+        checkPageBreak(lines.length * 5 + 2);
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(50, 50, 50);
+        doc.text(lines, margin + 2, y);
+        y += lines.length * 5 + 2;
+      });
+      y += 3;
+    };
+
+    // ── HEADER ──
+    doc.setFillColor(102, 126, 234);
+    doc.rect(0, 0, pageWidth, 38, "F");
+    doc.setFontSize(18);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(255, 255, 255);
+    doc.text("MINUTES OF MEETING", margin, 16);
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "normal");
+    doc.text(selectedMeeting.title || "Meeting Report", margin, 26);
+    doc.setFontSize(9);
+    doc.text(new Date(selectedMeeting.createdAt).toLocaleString(), margin, 34);
+    y = 45;
+
+    // ── METADATA BOX ──
+    doc.setFillColor(248, 250, 252);
+    doc.setDrawColor(200, 210, 230);
+    doc.rect(margin, y, contentWidth, 28, "FD");
+
+    const metaLeft = [
+      ["Date", new Date(selectedMeeting.createdAt).toLocaleString()],
+      ["Duration", `${selectedMeeting.durationMinutes?.toFixed(1) || 0} minutes`],
+      ["Participants", `${(selectedMeeting.participants?.length || 0) + 1} person(s)`],
+    ];
+    const metaRight = [
+      ["Confidence", `${selectedMeeting.confidenceScore || 0}%`],
+      ["Tone", selectedMeeting.sentiment || "Neutral"],
+      ["Status", selectedMeeting.status || "completed"],
+    ];
+
+    metaLeft.forEach(([label, value], i) => {
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(102, 126, 234);
+      doc.text(`${label}:`, margin + 3, y + 7 + i * 7);
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(50, 50, 50);
+      doc.text(String(value), margin + 25, y + 7 + i * 7);
+    });
+
+    metaRight.forEach(([label, value], i) => {
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(102, 126, 234);
+      doc.text(`${label}:`, margin + contentWidth / 2 + 3, y + 7 + i * 7);
+      doc.setFont("helvetica", "normal");
+      const toneColor =
+        value === "Positive" ? [22, 163, 74] :
+        value === "Tense"    ? [220, 38, 38] :
+                               [50, 50, 50];
+      doc.setTextColor(...toneColor);
+      doc.text(String(value), margin + contentWidth / 2 + 23, y + 7 + i * 7);
+    });
+
+    y += 33;
+
+    // ── SECTIONS ──
+    writeSectionHeader("Summary");
+    writeText(selectedMeeting.summary || "No summary available.", 10);
+    y += 3;
+
+    writeSectionHeader("Key Discussion Points");
+    writeListItems(selectedMeeting.keyPoints);
+
+    writeSectionHeader("Decisions Taken");
+    writeListItems(selectedMeeting.decisions);
+
+    writeSectionHeader("Action Items");
+    writeListItems(selectedMeeting.actionItems);
+
+    if (selectedMeeting.transcript && selectedMeeting.transcript.trim()) {
+      writeSectionHeader("Full Transcript");
+      writeText(selectedMeeting.transcript, 9);
+    }
+
+    // ── PAGE NUMBERS ──
+    const totalPages = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= totalPages; i++) {
+      doc.setPage(i);
+      doc.setFontSize(8);
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(150, 150, 150);
+      doc.text(
+        `Page ${i} of ${totalPages}`,
+        pageWidth / 2,
+        pageHeight - 8,
+        { align: "center" }
+      );
+    }
+
+    const safeName = (selectedMeeting.title || "Meeting")
+      .replace(/[^a-z0-9]/gi, "_")
+      .substring(0, 40);
+    doc.save(`${safeName}_Report.pdf`);
   };
 
   /* ==========================================
@@ -157,19 +298,19 @@ const Meetings = () => {
                 <h4>📊 Meeting Analytics</h4>
                 <div className="analytics-grid">
                   <div className="metric">
-                    <span className="metric-label">Duration</span>
+                    <span className="metric-label">Duration: </span>
                     <span className="metric-value">
                       {selectedMeeting.durationMinutes?.toFixed(1) || 0} min
                     </span>
                   </div>
                   <div className="metric">
-                    <span className="metric-label">Confidence</span>
+                    <span className="metric-label">Confidence: </span>
                     <span className="metric-value">
                       {selectedMeeting.confidenceScore || 0}%
                     </span>
                   </div>
                   <div className="metric">
-                    <span className="metric-label">Tone</span>
+                    <span className="metric-label">Tone: </span>
                     <span
                       className={`metric-value sentiment-${selectedMeeting.sentiment?.toLowerCase()}`}
                     >
@@ -177,7 +318,7 @@ const Meetings = () => {
                     </span>
                   </div>
                   <div className="metric">
-                    <span className="metric-label">Participants</span>
+                    <span className="metric-label">Participants: </span>
                     <span className="metric-value">
                       {(selectedMeeting.participants?.length || 0) + 1}
                     </span>
