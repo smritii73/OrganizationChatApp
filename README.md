@@ -1,4 +1,4 @@
-# VibeVerse 💭
+# OrganizationChatApplication
 
 A professional multilingual real-time communication platform with AI-powered meeting transcription and intelligent note generation. Built as a collaborative B.E. Information Technology final-year capstone project demonstrating distributed systems architecture, real-time data synchronization, and natural language processing integration.
 
