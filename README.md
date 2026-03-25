@@ -666,9 +666,9 @@ CORS_ORIGIN=https://yourdomain.com
 
 ## Team & Attribution
 
-**Team Members**: Muntajir Hussain Gazi, Tushar Manna  
+**Team Members**: Smriti Dube, Jaykit Maurya, Nikshit Joshi, Vaishnavi Dhule
 **Institution**: B.E. Information Technology, Final Year Capstone  
-**Duration**: 6 months (final semester)  
+**Duration**: 12 months (final year)  
 **Development Status**: Complete and functional
 
 ---
